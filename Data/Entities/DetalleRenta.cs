@@ -1,12 +1,13 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace MilesCarRental.Models
+namespace MilesCarRental.Data.Entities
 {
     [Table("DetalleRenta")]
-    public class DetalleRentaModel
+    public class DetalleRenta
     {
         [Key]
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int Id { get; set; }
 
         [Required]
@@ -15,16 +16,16 @@ namespace MilesCarRental.Models
         //Llave foranea a Localidad Origen y Destino
         [Required]
         public required int LocalidadOrigenId { get; set; }
-        public LocalidadModel LocalidadOrigen { get;set;} = null!;
+        public Localidad LocalidadOrigen { get; set; } = null!;
 
         [Required]
         public required int LocalidadDestinoId { get; set; }
-        public LocalidadModel LocalidadDestino{ get; set; } = null!;
+        public Localidad LocalidadDestino { get; set; } = null!;
 
         //Llave foranea a Vehiculo
         [Required]
         public required int VehiculoId { get; set; }
-        public VehiculoModel Vehiculo { get; set; } = null!;
+        public Vehiculo Vehiculo { get; set; } = null!;
 
         [Required]
         public required DateTime FechaInicioRenta { get; set; }
@@ -35,6 +36,6 @@ namespace MilesCarRental.Models
         [Required]
         public required int EstadoId { get; set; }
 
-        public EstadoModel Estado { get; set; } = null!;
+        public Estado Estado { get; set; } = null!;
     }
 }

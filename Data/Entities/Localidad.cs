@@ -2,13 +2,14 @@
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace MilesCarRental.Models
+namespace MilesCarRental.Data.Entities
 {
     [Table("Localidad")]
     [Index(nameof(Nombre), IsUnique = true)]
-    public class LocalidadModel
+    public class Localidad
     {
         [Key]
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int Id { get; set; }
 
         [MaxLength(50), Required]
@@ -17,15 +18,15 @@ namespace MilesCarRental.Models
         //Llave foranea a Ciudad
         [Required]
         public int CiudadId { get; set; }
-        public CiudadModel Ciudad { get; set; } = null!;
+        public Ciudad Ciudad { get; set; } = null!;
 
         //Llave foranea a Estado
         [Required]
         public int EstadoId { get; set; }
-        public EstadoModel Estado { get; set; } = null!;
+        public Estado Estado { get; set; } = null!;
 
         //Exporta datos dependientes segun relacion
-        public ICollection<DetalleRentaModel> DetalleRentaOrigen { get;} = new List<DetalleRentaModel>();
-        public ICollection<DetalleRentaModel> DetalleRentaDestino { get; } = new List<DetalleRentaModel>();
+        public ICollection<DetalleRenta> DetalleRentaOrigen { get; } = new List<DetalleRenta>();
+        public ICollection<DetalleRenta> DetalleRentaDestino { get; } = new List<DetalleRenta>();
     }
 }
